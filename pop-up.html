@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Valentine Popup</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style/style.css" />
+  <link rel="stylesheet" href="style/pop-up.css" />
+</head>
+<body>
+  <div class="val-popup-page">
+    <canvas id="confetti-canvas"></canvas>
+    <div class="val-popup-card">
+      <h2>Happy Valentine’s Day 💕</h2>
+      <p>
+        Love is found in the quiet moments, the shared smiles,
+        and the stories we write together.
+        <br /><br />
+        Welcome to our little love magazine ✨
+      </p>
+      <a href="main.html" class="val-btn">Start Reading</a>
+    </div>
+  </div>
+
+  <script>
+    const confettiCanvas = document.getElementById("confetti-canvas");
+    const ctx = confettiCanvas.getContext("2d");
+    let confettiParticles = [];
+
+    function resizeCanvas() {
+      confettiCanvas.width = window.innerWidth;
+      confettiCanvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    function createConfetti() {
+      for (let i = 0; i < 150; i++) {
+        confettiParticles.push({
+          x: Math.random() * confettiCanvas.width,
+          y: Math.random() * confettiCanvas.height - confettiCanvas.height,
+          r: Math.random() * 6 + 4,
+          d: Math.random() * 20 + 10,
+          color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+          tilt: Math.random() * 10 - 10,
+          tiltAngleIncrement: Math.random() * 0.07 + 0.05
+        });
+      }
+    }
+
+    function drawConfetti() {
+      ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      confettiParticles.forEach((p, index) => {
+        ctx.beginPath();
+        ctx.lineWidth = p.r;
+        ctx.strokeStyle = p.color;
+        ctx.moveTo(p.x + p.tilt + p.r / 2, p.y);
+        ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r / 2);
+        ctx.stroke();
+
+        p.tilt += p.tiltAngleIncrement;
+        p.y += (Math.cos(p.d) + 3 + p.r / 2) * 0.5;
+        p.x += Math.sin(p.d);
+
+        if (p.y > confettiCanvas.height) {
+          confettiParticles.splice(index, 1);
+        }
+      });
+      if (confettiParticles.length > 0) requestAnimationFrame(drawConfetti);
+    }
+
+    window.addEventListener("load", () => {
+      createConfetti();
+      drawConfetti();
+    });
+  </script>
+</body>
+</html>

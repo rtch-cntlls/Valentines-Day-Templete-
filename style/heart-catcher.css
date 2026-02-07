@@ -1,0 +1,119 @@
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at top, #fff0f6, #f8f6f3);
+    overflow-x: hidden;
+    text-align: center;
+    color: #495057;
+  }
+
+  .mag-header {
+    padding: 20px 10px;
+  }
+  
+  .mag-header .issue {
+    display: block;
+    letter-spacing: 3px;
+    font-size: 12px;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  
+  .mag-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 48px);
+    color: #c9184a;
+    margin: 10px 0;
+  }
+  
+  .mag-header p {
+    font-size: 15px;
+    opacity: 0.8;
+    margin: 4px 0;
+  }
+  
+  #game-area {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    height: 70vh;
+    border: 2px solid #c9184a;
+    margin: 20px auto;
+    overflow: hidden;
+    background: linear-gradient(to top, #ffe6f0, #fff0f6);
+    border-radius: 20px;
+  }
+
+  #basket {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    width: 120px;
+    height: 40px;
+    background: linear-gradient(135deg, #c9184a, #ff758f);
+    border-radius: 20px;
+    transform: translateX(-50%);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+
+  .heart {
+    position: absolute;
+    top: -30px;
+    font-size: 24px;
+    pointer-events: none;
+    animation-name: fall;
+    animation-timing-function: linear;
+  }
+  
+  .heart.gold {
+    color: gold;
+    text-shadow: 0 0 5px #fff, 0 0 10px #ffd700;
+  }
+  
+  @keyframes fall {
+    to {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+ 
+  #score-display, #timer-display {
+    font-weight: bold;
+    font-size: 18px;
+    margin: 5px 0;
+  }
+
+  .btn-gradient {
+    padding: 12px 26px;
+    font-size: 15px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, #c9184a, #ff758f);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 12px 30px rgba(201,24,74,.35);
+    margin-top: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .btn-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px rgba(201,24,74,.45);
+  }
+
+  @media (max-width: 768px) {
+    #basket {
+      width: 90px;
+      height: 35px;
+    }
+    
+    .heart {
+      font-size: 20px;
+    }
+    
+    #game-area {
+      height: 60vh;
+    }
+  }
+  
